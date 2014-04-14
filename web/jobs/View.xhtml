@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="JobsViewDlg" widgetVar="JobsViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewJobsTitle}">
+            <h:form id="JobsViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{jobsController.selected != null}">
+                        <h:outputText value="#{bundle.ViewJobsLabel_id}"/>
+                        <h:outputText value="#{jobsController.selected.id}" title="#{bundle.ViewJobsTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewJobsLabel_rawData}"/>
+                        <h:outputText value="#{jobsController.selected.rawData}" title="#{bundle.ViewJobsTitle_rawData}"/>
+                        <h:outputText value="#{bundle.ViewJobsLabel_host}"/>
+                        <h:outputText value="#{jobsController.selected.host}" title="#{bundle.ViewJobsTitle_host}"/>
+                        <h:outputText value="#{bundle.ViewJobsLabel_timeOfEntry}"/>
+                        <h:outputText value="#{jobsController.selected.timeOfEntry}" title="#{bundle.ViewJobsTitle_timeOfEntry}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="JobsViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="JobsEditDlg" widgetVar="JobsEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditJobsTitle}">
+            <h:form id="JobsEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{jobsController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditJobsLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{jobsController.selected.id}" title="#{bundle.EditJobsTitle_id}" required="true" requiredMessage="#{bundle.EditJobsRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditJobsLabel_rawData}" for="rawData" />
+                        <p:inputTextarea rows="4" cols="30" id="rawData" value="#{jobsController.selected.rawData}" title="#{bundle.EditJobsTitle_rawData}" />
+                        <p:outputLabel value="#{bundle.EditJobsLabel_host}" for="host" />
+                        <p:inputText id="host" value="#{jobsController.selected.host}" title="#{bundle.EditJobsTitle_host}" />
+                        <p:outputLabel value="#{bundle.EditJobsLabel_timeOfEntry}" for="timeOfEntry" />
+                        <p:calendar id="timeOfEntry" pattern="MM/dd/yyyy HH:mm:ss" value="#{jobsController.selected.timeOfEntry}" title="#{bundle.EditJobsTitle_timeOfEntry}" required="true" requiredMessage="#{bundle.EditJobsRequiredMessage_timeOfEntry}" showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{jobsController.update}" value="#{bundle.Save}" update="display,:JobsListForm:datalist,:growl" oncomplete="handleSubmit(args, 'JobsEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="JobsEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
